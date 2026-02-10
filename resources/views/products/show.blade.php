@@ -5,8 +5,9 @@
 @section('content')
     <div class="grid md:grid-cols-2 gap-8">
         <div class="bg-white shadow rounded-lg p-4 flex items-center justify-center">
-            @if($product->image_path)
-                <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}" class="max-h-80 object-contain">
+            @if ($product->image_path)
+                <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}"
+                    class="max-h-80 object-contain">
             @else
                 <div class="text-gray-500">Pas d'image disponible</div>
             @endif
@@ -27,7 +28,7 @@
             </p>
 
             <div class="mb-4">
-                @if($product->stock > 0)
+                @if ($product->stock > 0)
                     <span class="inline-block px-3 py-1 text-sm bg-green-100 text-green-700 rounded">
                         En stock ({{ $product->stock }})
                     </span>
@@ -38,9 +39,17 @@
                 @endif
             </div>
 
-            <button class="px-5 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
-                Ajouter au panier
-            </button>
+            <form action="{{ route('cart.add', $product) }}" method="POST" class="mt-4">
+                @csrf
+                <div class="flex items-center gap-3 mb-4">
+                    <label for="quantity" class="text-sm text-gray-700">Quantité :</label>
+                    <input id="quantity" name="quantity" type="number" min="1" value="1"
+                        class="w-20 border-gray-300 rounded-md shadow-sm">
+                </div>
+                <button type="submit" class="px-5 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+                    Ajouter au panier
+                </button>
+            </form>
         </div>
     </div>
 @endsection
