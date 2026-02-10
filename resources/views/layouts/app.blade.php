@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="fr">
+
 <head>
     <meta charset="utf-8">
     <title>@yield('title', 'E-commerce pièces PC')</title>
@@ -7,6 +8,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+
 <body class="bg-gray-100 text-gray-900">
 
     <header class="bg-white shadow">
@@ -24,10 +26,11 @@
     </main>
 
     <footer class="bg-white border-t mt-10">
-        <div class="max-w-6xl mx-auto px-4 py-4 text-center text-sm text-gray-500">
+        <div class=" max-w-6xl mx-auto px-4 py-4 text-center text-sm text-gray-500">
             &copy; {{ date('Y') }} PC Shop - Tous droits réservés
         </div>
     </footer>
 
 </body>
+
 </html>
