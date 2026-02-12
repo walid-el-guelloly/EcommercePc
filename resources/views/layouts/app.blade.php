@@ -19,16 +19,20 @@
             </a>
 
             <nav class="hidden md:flex items-center gap-6 text-sm">
-                <a href="{{ route('home') }}" class="text-slate-700 dark:text-slate-200 hover:text-brand-600">
+                <a href="#hero" data-section="hero"
+                    class="nav-link text-slate-700 dark:text-slate-200 hover:text-brand-600 border-b-2 border-transparent pb-1">
                     Accueil
                 </a>
-                <a href="{{ route('products.index') }}" class="text-slate-700 dark:text-slate-200 hover:text-brand-600">
+                <a href="#catalogue" data-section="catalogue"
+                    class="nav-link text-slate-700 dark:text-slate-200 hover:text-brand-600 border-b-2 border-transparent pb-1">
                     Catalogue
                 </a>
-                <a href="{{ route('about') }}" class="text-slate-700 dark:text-slate-200 hover:text-brand-600">
+                <a href="#about" data-section="about"
+                    class="nav-link text-slate-700 dark:text-slate-200 hover:text-brand-600 border-b-2 border-transparent pb-1">
                     À propos
                 </a>
-                <a href="{{ route('contact.show') }}" class="text-slate-700 dark:text-slate-200 hover:text-brand-600">
+                <a href="#contact" data-section="contact"
+                    class="nav-link text-slate-700 dark:text-slate-200 hover:text-brand-600 border-b-2 border-transparent pb-1">
                     Contact
                 </a>
             </nav>
@@ -49,6 +53,31 @@
                         </span>
                     @endif
                 </a>
+
+                {{-- Liens auth --}}
+                @guest
+                    <a href="{{ route('login') }}" class="text-xs text-slate-700 dark:text-slate-200 hover:text-brand-600">
+                        Connexion
+                    </a>
+                    <a href="{{ route('register') }}"
+                        class="text-xs text-white bg-brand-600 hover:bg-brand-700 px-3 py-1.5 rounded-full">
+                        Inscription
+                    </a>
+                @endguest
+
+                @auth
+                    <div class="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-200">
+                        <span class="hidden sm:inline">
+                            {{ auth()->user()->name }}
+                        </span>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="text-xs text-slate-500 hover:text-red-500">
+                                Déconnexion
+                            </button>
+                        </form>
+                    </div>
+                @endauth
 
                 {{-- Toggle dark mode --}}
                 <button id="theme-toggle" type="button"
