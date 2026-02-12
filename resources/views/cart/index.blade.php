@@ -69,7 +69,7 @@
             </table>
         </div>
 
-        <div class="mt-4 flex justify-between">
+        <div class="mt-4 flex justify-between items-center">
             <form action="{{ route('cart.clear') }}" method="POST">
                 @csrf
                 <x-button variant="secondary" size="sm">
@@ -77,9 +77,17 @@
                 </x-button>
             </form>
 
-            <x-button>
-                Procéder au paiement (bientôt)
-            </x-button>
+            @auth
+                <a href="{{ route('checkout.show') }}">
+                    <x-button>
+                        Passer à la commande
+                    </x-button>
+                </a>
+            @else
+                <a href="{{ route('login') }}" class="text-xs text-slate-500 hover:text-brand-600">
+                    Connectez-vous pour finaliser votre commande
+                </a>
+            @endauth
         </div>
     @endif
 @endsection

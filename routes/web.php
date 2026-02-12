@@ -7,6 +7,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrderController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -44,4 +46,11 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     Route::get('/compte', [AccountController::class, 'index'])->name('account.index');
     Route::post('/compte', [AccountController::class, 'updateProfile'])->name('account.updateProfile');
     Route::post('/compte/mot-de-passe', [AccountController::class, 'updatePassword'])->name('account.updatePassword');
+
+    // Checkout
+    Route::get('/checkout', [CheckoutController::class, 'show'])->name('checkout.show');
+    Route::post('/checkout', [CheckoutController::class, 'process'])->name('checkout.process');
+
+    // Détail d'une commande
+    Route::get('/commandes/{order}', [OrderController::class, 'show'])->name('orders.show');
 });
