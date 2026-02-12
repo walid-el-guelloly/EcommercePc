@@ -66,7 +66,11 @@
                 @endguest
 
                 @auth
-                    <div class="flex items-center gap-2 text-xs text-slate-700 dark:text-slate-200">
+                    <div class="flex items-center gap-3 text-xs text-slate-700 dark:text-slate-200">
+                        <a href="{{ route('account.index') }}" class="hidden sm:inline hover:text-brand-600">
+                            Mon compte
+                        </a>
+                        <span class="hidden sm:inline text-slate-400">|</span>
                         <span class="hidden sm:inline">
                             {{ auth()->user()->name }}
                         </span>

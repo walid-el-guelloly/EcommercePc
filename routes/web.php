@@ -6,6 +6,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\AccountController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -38,3 +39,9 @@ Route::middleware('guest')->group(function () {
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
+
+    Route::middleware('auth')->group(function () {
+    Route::get('/compte', [AccountController::class, 'index'])->name('account.index');
+    Route::post('/compte', [AccountController::class, 'updateProfile'])->name('account.updateProfile');
+    Route::post('/compte/mot-de-passe', [AccountController::class, 'updatePassword'])->name('account.updatePassword');
+});
