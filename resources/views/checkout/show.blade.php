@@ -3,15 +3,16 @@
 @section('title', 'Finaliser ma commande - PC Shop')
 
 @section('content')
+    <x-checkout-steps current="checkout" />
     <h1 class="text-2xl font-bold mb-4">Finaliser ma commande</h1>
 
-    @if($errors->has('checkout'))
+    @if ($errors->has('checkout'))
         <x-alert type="error">
             {{ $errors->first('checkout') }}
         </x-alert>
     @endif
 
-    @if(session('success'))
+    @if (session('success'))
         <x-alert type="success">
             {{ session('success') }}
         </x-alert>
@@ -19,11 +20,12 @@
 
     <div class="grid md:grid-cols-3 gap-8">
         {{-- Récap produits --}}
-        <div class="md:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl p-5 shadow-soft">
+        <div
+            class="md:col-span-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl p-5 shadow-soft">
             <h2 class="text-lg font-semibold mb-4">Votre panier</h2>
 
             <div class="divide-y divide-slate-200 dark:divide-slate-700">
-                @foreach($cart as $productId => $item)
+                @foreach ($cart as $productId => $item)
                     <div class="py-3 flex items-center justify-between">
                         <div>
                             <div class="font-medium text-sm">

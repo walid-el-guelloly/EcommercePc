@@ -24,7 +24,7 @@ class ProductSeeder extends Seeder
                     'description' => 'Processeur 6 cœurs / 12 threads pour socket LGA1700.',
                     'price'       => 189.99,
                     'stock'       => 15,
-                    'image_path'  => null,
+                    'image_path'  => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCFcT2Vde1tV8uXQflILQFQStJI4t6RIef2w&s',
                 ]
             );
 

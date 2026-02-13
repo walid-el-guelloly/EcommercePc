@@ -1,29 +1,23 @@
-/** @type {import('tailwindcss').Config} */
 export default {
   darkMode: 'class',
   content: [
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
-    "./resources/**/*.vue",
   ],
   theme: {
     extend: {
       colors: {
-        brand: {
-          50:  '#eef2ff',
-          100: '#e0e7ff',
-          500: '#6366f1',
-          600: '#4f46e5',
-          700: '#4338ca',
+        brand: { // bleu type joutech
+          50:  '#e3f2ff',
+          100: '#bbdeff',
+          500: '#0073cf',
+          600: '#005fa8',
+          700: '#004885',
         },
-      },
-      borderRadius: {
-        'xl': '0.9rem',
-        '2xl': '1.25rem',
-        '3xl': '1.75rem',
-      },
-      boxShadow: {
-        'soft': '0 10px 30px rgba(15, 23, 42, 0.08)',
+        accent: { // rouge bouton
+          500: '#f4425f',
+          600: '#e0244e',
+        },
       },
       fontFamily: {
         sans: [

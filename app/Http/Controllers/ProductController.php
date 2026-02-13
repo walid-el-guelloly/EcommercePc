@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -26,9 +27,21 @@ class ProductController extends Controller
             });
         }
 
-        $products = $query->paginate(12)->withQueryString();
+        // Tri
+        $sort = $request->input('sort');
+        if ($sort === 'price_asc') {
+            $query->orderBy('price', 'asc');
+        } elseif ($sort === 'price_desc') {
+            $query->orderBy('price', 'desc');
+        } else {
+            // par défaut : les plus récents
+            $query->latest();
+        }
 
-        return view('products.index', compact('products'));
+        $products = $query->paginate(12)->withQueryString();
+        $categories = Category::orderBy('name')->get();
+
+        return view('products.index', compact('products', 'categories', 'sort'));
     }
 
     public function show(Product $product)
