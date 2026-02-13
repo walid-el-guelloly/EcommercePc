@@ -8,7 +8,8 @@
 
     {{-- HERO type bannière Joutech --}}
     <section id="hero" data-section-id="hero" class="scroll-mt-32 mb-10">
-        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-soft">
+        <div
+            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-soft">
             <div class="grid md:grid-cols-2">
                 <div class="p-8 flex flex-col justify-center">
                     <p class="text-xs uppercase tracking-wide text-brand-600 mb-2">
@@ -22,20 +23,19 @@
                         pour le gaming et le travail.
                     </p>
                     <div class="flex flex-wrap gap-3">
-                        <a href="#catalogue" class="px-6 py-2.5 bg-brand-600 text-white text-sm font-semibold rounded-full hover:bg-brand-700">
+                        <a href="#catalogue"
+                            class="px-6 py-2.5 bg-brand-600 text-white text-sm font-semibold rounded-full hover:bg-brand-700">
                             Voir toutes les offres
                         </a>
-                        <a href="#reseller" class="px-6 py-2.5 border border-brand-600 text-brand-600 text-sm font-semibold rounded-full hover:bg-brand-50 dark:hover:bg-slate-800">
+                        <a href="#reseller"
+                            class="px-6 py-2.5 border border-brand-600 text-brand-600 text-sm font-semibold rounded-full hover:bg-brand-50 dark:hover:bg-slate-800">
                             Devenir revendeur
                         </a>
                     </div>
                 </div>
                 <div class="bg-slate-900/5 dark:bg-slate-900 flex items-center justify-center p-6">
-                    <img
-                        src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1200&q=80"
-                        alt="Laptop et périphériques"
-                        class="w-full h-full object-cover"
-                    >
+                    <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1200&q=80"
+                        alt="Laptop et périphériques" class="w-full h-full object-cover">
                 </div>
             </div>
         </div>
@@ -53,8 +53,8 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            @foreach($newProducts as $product)
+        {{-- <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            @foreach ($newProducts as $product)
                 <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 flex flex-col items-center shadow-soft hover:shadow-lg transition">
                     @php
                         $image = null;
@@ -66,7 +66,7 @@
                     @endphp
 
                     <div class="h-32 flex items-center justify-center mb-4">
-                        @if($image)
+                        @if ($image)
                             <img src="{{ $image }}" alt="{{ $product->name }}" class="max-h-full object-contain">
                         @else
                             <span class="text-xs text-slate-400">Image à venir</span>
@@ -90,12 +90,59 @@
                     </form>
                 </div>
             @endforeach
+        </div> --}}
+
+        {{-- Liste horizontale scrollable --}}
+        <div class="relative -mx-4">
+            <div class="flex gap-4 overflow-x-auto pb-4 px-4 no-scrollbar snap-x snap-mandatory">
+                @foreach ($newProducts as $product)
+                    @php
+                        // use Illuminate\Support\Str;
+                        $image = null;
+                        if ($product->image_path) {
+                            $image = Str::startsWith($product->image_path, ['http://', 'https://'])
+                                ? $product->image_path
+                                : asset('storage/' . $product->image_path);
+                        }
+                    @endphp
+
+                    <div
+                        class="min-w-[220px] max-w-[260px] flex-shrink-0 snap-start
+                            bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800
+                            rounded-2xl p-6 flex flex-col items-center shadow-soft hover:shadow-lg transition">
+                        <div class="h-32 flex items-center justify-center mb-4">
+                            @if ($image)
+                                <img src="{{ $image }}" alt="{{ $product->name }}" class="max-h-full object-contain">
+                            @else
+                                <span class="text-xs text-slate-400">Image à venir</span>
+                            @endif
+                        </div>
+
+                        <h3 class="text-sm font-semibold text-center mb-2">
+                            <a href="{{ route('products.show', $product->slug) }}" class="hover:text-brand-500">
+                                {{ Str::limit($product->name, 50) }}
+                            </a>
+                        </h3>
+                        <div class="text-base font-bold text-brand-500 mb-3">
+                            {{ number_format($product->price, 2, ',', ' ') }} €
+                        </div>
+
+                        <form action="{{ route('cart.add', $product) }}" method="POST" class="mt-auto">
+                            @csrf
+                            <x-button size="sm">
+                                Ajouter au panier
+                            </x-button>
+                        </form>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </section>
 
     {{-- BLOC "DEVENIR REVENDEUR" & AVANTAGES --}}
     <section id="reseller" data-section-id="reseller" class="scroll-mt-32 mb-12">
-        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 shadow-soft text-center mb-6">
+        <div
+            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 shadow-soft text-center mb-6">
             <h2 class="text-2xl font-bold mb-3">
                 Devenir Revendeur <span class="text-brand-600">PC Shop</span>.
             </h2>
@@ -103,12 +150,16 @@
                 Vous êtes revendeur ou professionnel de l'informatique ?
                 Rejoignez notre réseau et bénéficiez de conditions avantageuses sur l’ensemble de nos produits.
             </p>
-            <x-button>
+            {{-- <x-button href="#about">
                 Plus d’informations
-            </x-button>
+            </x-button> --}}
+            <a href="#about"
+                class="px-6 py-2.5 bg-brand-600 text-white text-sm font-semibold rounded-full hover:bg-brand-700">
+                Plus d’informations
+            </a>
         </div>
 
-        <div id="pricing" class="grid md:grid-cols-3 gap-6">
+        {{-- <div id="pricing" class="grid md:grid-cols-3 gap-6">
             <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5">
                 <h3 class="font-semibold mb-2">Livraison partout</h3>
                 <p class="text-sm text-slate-600 dark:text-slate-300">
@@ -127,7 +178,7 @@
                     Vos transactions sont protégées grâce à nos partenaires de paiement.
                 </p>
             </div>
-        </div>
+        </div> --}}
     </section>
 
     {{-- On garde ABOUT & CONTACT comme tu les avais déjà, éventuellement en bas --}}

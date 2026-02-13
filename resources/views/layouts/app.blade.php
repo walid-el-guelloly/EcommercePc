@@ -53,13 +53,13 @@
 
             {{-- Barre de recherche large --}}
             <form action="{{ route('products.index') }}" method="GET" class="flex-1">
-                <div class="flex items-center bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-full px-4 py-2">
+                <div class="flex items-center bg-slate-50 dark:bg-slate-900 border border-slate-400 dark:border-slate-700 rounded-full px-4 py-2">
                     <input
                         type="text"
                         name="q"
                         placeholder="Rechercher dans le catalogue"
                         value="{{ request('q') }}"
-                        class="flex-1 bg-transparent border-0 focus:ring-0 text-sm"
+                        class="flex-1 bg-transparent border-0 focus:ring-0 text-sm outline-none focus:outline-none focus:ring-0 border-none"
                     >
                     <button type="submit" class="text-slate-500 hover:text-brand-600 text-sm font-medium">
                         Rechercher
