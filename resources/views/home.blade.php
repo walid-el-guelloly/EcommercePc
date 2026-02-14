@@ -43,7 +43,7 @@
 
     {{-- HERO --}}
     {{-- HERO --}}
-    <section id="hero" data-section-id="hero" class="scroll-mt-32 mb-12">
+    <section id="hero" data-section-id="hero" class="mb-8">
         {{-- Conteneur full-width qui sort du max-w du <main> --}}
         <div class="relative left-1/2 right-1/2 -ml-[50vw] w-screen">
             <div
@@ -104,7 +104,7 @@
                         <div class="relative w-full max-w-md">
                             <div
                                 class="aspect-[4/5] rounded-[2rem] bg-gradient-to-br from-slate-800/90 to-slate-900/95 border border-brand-400/40 shadow-2xl flex items-center justify-center overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1618005198919-d3d4b5a92eee?auto=format&fit=crop&w=1100&q=80"
+                                <img src="https://plus.unsplash.com/premium_vector-1768322782551-9544748eff02?q=80&w=696&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                                     alt="Setup PC moderne" class="h-full w-full object-cover object-center">
                             </div>
 
@@ -115,7 +115,7 @@
                             </div>
 
                             {{-- carte info en bas --}}
-                            <div
+                            {{-- <div
                                 class="absolute -bottom-5 left-6 right-6 rounded-2xl bg-slate-900/90 backdrop-blur px-4 py-3 text-xs text-slate-100/90 border border-slate-700/80 shadow-lg">
                                 <div class="flex items-center justify-between gap-4">
                                     <div>
@@ -129,7 +129,7 @@
                                         <span class="font-semibold text-sky-300">24 mois</span><br>de garantie
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>

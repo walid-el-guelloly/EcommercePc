@@ -3,9 +3,14 @@
 @section('title', 'Inscription - PC Shop')
 
 @section('content')
-    <div class="flex justify-center">
+    <div class="min-h-[70vh] flex items-start md:items-center justify-center">
         <div class="w-full max-w-md">
-            <h1 class="text-2xl font-bold mb-4 text-center">Créer un compte</h1>
+            <div class="mb-6 text-center">
+                <h1 class="text-2xl md:text-3xl font-bold mb-2">Créer un compte</h1>
+                <p class="text-sm text-slate-600 dark:text-slate-300">
+                    En créant un compte, vous pouvez suivre vos commandes et retrouver vos informations facilement.
+                </p>
+            </div>
 
             @if(session('success'))
                 <x-alert type="success">
@@ -13,73 +18,91 @@
                 </x-alert>
             @endif
 
-            <form method="POST" action="{{ route('register') }}" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-2xl p-6 shadow-soft space-y-4">
-                @csrf
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-3xl p-6 shadow-soft">
+                <form method="POST" action="{{ route('register') }}" class="space-y-5">
+                    @csrf
 
-                <div>
-                    <label for="name" class="block text-sm font-medium mb-1">Nom complet *</label>
-                    <input
-                        id="name"
-                        name="name"
-                        type="text"
-                        value="{{ old('name') }}"
-                        required
-                        class="w-full rounded-xl border-slate-300 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 text-sm focus:ring-brand-500 focus:border-brand-500"
-                    >
-                    @error('name')
-                        <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
+                    <div class="space-y-1">
+                        <label for="name" class="block text-sm font-medium">
+                            Nom complet *
+                        </label>
+                        <input
+                            id="name"
+                            name="name"
+                            type="text"
+                            value="{{ old('name') }}"
+                            required
+                            autocomplete="name"
+                            class="input-soft"
+                        >
+                        @error('name')
+                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                <div>
-                    <label for="email" class="block text-sm font-medium mb-1">Email *</label>
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value="{{ old('email') }}"
-                        required
-                        class="w-full rounded-xl border-slate-300 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 text-sm focus:ring-brand-500 focus:border-brand-500"
-                    >
-                    @error('email')
-                        <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
+                    <div class="space-y-1">
+                        <label for="email" class="block text-sm font-medium">
+                            Email *
+                        </label>
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            value="{{ old('email') }}"
+                            required
+                            autocomplete="email"
+                            class="input-soft"
+                        >
+                        @error('email')
+                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                <div>
-                    <label for="password" class="block text-sm font-medium mb-1">Mot de passe *</label>
-                    <input
-                        id="password"
-                        name="password"
-                        type="password"
-                        required
-                        class="w-full rounded-xl border-slate-300 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 text-sm focus:ring-brand-500 focus:border-brand-500"
-                    >
-                    @error('password')
-                        <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
+                    <div class="space-y-1">
+                        <label for="password" class="block text-sm font-medium">
+                            Mot de passe *
+                        </label>
+                        <input
+                            id="password"
+                            name="password"
+                            type="password"
+                            required
+                            autocomplete="new-password"
+                            class="input-soft"
+                        >
+                        @error('password')
+                            <p class="text-xs text-red-500 mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
 
-                <div>
-                    <label for="password_confirmation" class="block text-sm font-medium mb-1">Confirmer le mot de passe *</label>
-                    <input
-                        id="password_confirmation"
-                        name="password_confirmation"
-                        type="password"
-                        required
-                        class="w-full rounded-xl border-slate-300 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 text-sm focus:ring-brand-500 focus:border-brand-500"
-                    >
-                </div>
+                    <div class="space-y-1">
+                        <label for="password_confirmation" class="block text-sm font-medium">
+                            Confirmer le mot de passe *
+                        </label>
+                        <input
+                            id="password_confirmation"
+                            name="password_confirmation"
+                            type="password"
+                            required
+                            autocomplete="new-password"
+                            class="input-soft"
+                        >
+                    </div>
 
-                <div class="flex items-center justify-between pt-2">
-                    <a href="{{ route('login') }}" class="text-xs text-slate-500 hover:underline">
-                        Déjà un compte ? Se connecter
-                    </a>
-                    <x-button>
-                        Créer mon compte
-                    </x-button>
-                </div>
-            </form>
+                    <div class="pt-2">
+                        <x-button class="w-full justify-center">
+                            Créer mon compte
+                        </x-button>
+                    </div>
+
+                    <div class="pt-1 text-center text-xs text-slate-600 dark:text-slate-300">
+                        Déjà un compte ?
+                        <a href="{{ route('login') }}" class="text-brand-600 hover:underline">
+                            Se connecter
+                        </a>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 @endsection

@@ -14,21 +14,21 @@
     <div class="bg-slate-100 dark:bg-slate-900 text-xs text-slate-600 dark:text-slate-300">
         <div class="max-w-7xl mx-auto px-4 py-1 flex items-center justify-between">
             <div class="flex items-center gap-2">
-                <span class="inline-flex items-center justify-center w-5 h-5 rounded-full border border-slate-400 text-[10px]">PDF</span>
-                <span class="font-medium">Liste de prix à télécharger</span>
+                {{-- <span class="inline-flex items-center justify-center w-5 h-5 rounded-full border border-slate-400 text-[10px]">PDF</span> --}}
+                <span class="font-medium">Découvrez nos offres exclusives</span>
             </div>
             <div class="flex items-center gap-4">
                 <a href="#contact" class="hover:text-brand-600 hidden sm:inline-flex items-center gap-1">
                     <span>Contactez‑nous</span>
                 </a>
                 <span class="hidden sm:inline text-slate-500 dark:text-slate-400">
-                    +212 522 25 52 67
+                    +212 694972457
                 </span>
-                <div class="hidden sm:flex items-center gap-2 text-slate-500 dark:text-slate-400">
-                    <span class="text-xs">FB</span>
-                    <span class="text-xs">IG</span>
-                    <span class="text-xs">IN</span>
-                </div>
+                {{-- <div class="hidden sm:flex items-center gap-2 text-slate-500 dark:text-slate-400">
+                    <span class="text-xs">.</span>
+                    <span class="text-xs">.</span>
+                    <span class="text-xs">.</span>
+                </div> --}}
 
                 {{-- Toggle dark mode --}}
                 <button
@@ -59,7 +59,7 @@
                         name="q"
                         placeholder="Rechercher dans le catalogue"
                         value="{{ request('q') }}"
-                        class="flex-1 bg-transparent border-0 focus:ring-0 text-sm outline-none focus:outline-none focus:ring-0 border-none"
+                        class="flex-1 bg-transparent border-0 text-sm outline-none focus:outline-none focus:ring-0 border-none"
                     >
                     <button type="submit" class="text-slate-500 hover:text-brand-600 text-sm font-medium">
                         Rechercher
@@ -102,13 +102,113 @@
                     @endif
                 </a>
             </div>
+
+            {{-- Icônes compte / logout / panier --}}
+            {{-- Icônes compte / logout / panier --}}
+            <!-- <div class="flex items-center gap-2 ml-auto">
+                @auth
+                    {{-- Icône Mon compte --}}
+                    <a
+                        href="{{ route('account.index') }}"
+                        aria-label="Mon compte"
+                        class="inline-flex items-center justify-center w-9 h-9 rounded-full border
+                            border-slate-300/80 dark:border-slate-600 bg-white/90 dark:bg-slate-900/90
+                            text-slate-700 dark:text-slate-100
+                            hover:border-brand-500 hover:text-brand-500 shadow-sm transition"
+                    >
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 12c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4Z"
+                                stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M4 20c0-2.2 2.7-4 6-4s6 1.8 6 4"
+                                stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+
+                    {{-- Icône Déconnexion --}}
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button
+                            type="submit"
+                            aria-label="Déconnexion"
+                            class="inline-flex items-center justify-center w-9 h-9 rounded-full border
+                                border-slate-300/80 dark:border-slate-600 bg-white/90 dark:bg-slate-900/90
+                                text-slate-700 dark:text-slate-100
+                                hover:border-red-500 hover:text-red-500 shadow-sm transition"
+                        >
+                            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"
+                                    stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M16 17l5-5-5-5"
+                                    stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M21 12H9"
+                                    stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </form>
+                @else
+                    {{-- Icône compte (connexion) --}}
+                    <a
+                        href="{{ route('login') }}"
+                        aria-label="Se connecter"
+                        class="inline-flex items-center justify-center w-9 h-9 rounded-full border
+                            border-slate-300/80 dark:border-slate-600 bg-white/90 dark:bg-slate-900/90
+                            text-slate-700 dark:text-slate-100
+                            hover:border-brand-500 hover:text-brand-500 shadow-sm transition"
+                    >
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 12c2.2 0 4-1.8 4-4s-1.8-4-4-4-4 1.8-4 4 1.8 4 4 4Z"
+                                stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M4 21v-1a4 4 0 0 1 4-4h2"
+                                stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 17l5-5-5-5"
+                                stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M21 12H11"
+                                stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                @endauth
+
+                {{-- Icône Panier --}}
+                @php
+                    $cart = session('cart', []);
+                    $count = array_sum(array_column($cart, 'quantity'));
+                @endphp
+                <a
+                    href="{{ route('cart.index') }}"
+                    aria-label="Panier ({{ $count }})"
+                    class="relative inline-flex items-center justify-center w-9 h-9 rounded-full border
+                        border-slate-300/80 dark:border-slate-600 bg-white/90 dark:bg-slate-900/90
+                        text-slate-700 dark:text-slate-100
+                        hover:border-brand-500 hover:text-brand-500 shadow-sm transition"
+                >
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="9" cy="21" r="1"
+                                stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="20" cy="21" r="1"
+                                stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 3h2l3.6 12.59A1 1 0 0 0 9.6 17h9.8a1 1 0 0 0 .98-.8L22 8H6"
+                            stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+
+                    @if($count > 0)
+                        <span class="absolute -top-1 -right-1 inline-flex items-center justify-center
+                                    min-w-[16px] h-4 px-1 rounded-full bg-brand-600 text-[10px] font-semibold text-white">
+                            {{ $count }}
+                        </span>
+                    @endif
+                </a>
+            </div> -->
         </div>
     </div>
 
     {{-- NAV BLEUE --}}
     <nav class="bg-brand-600 text-white text-sm font-medium">
         <div class="max-w-7xl mx-auto px-4 flex items-center gap-6 py-2">
-            <a href="#catalogue" class="hover:bg-brand-700 px-3 py-1 rounded">
+            <a href="/catalogue" class="hover:bg-brand-700 px-3 py-1 rounded">
                 Tous nos produits
             </a>
             <a href="#catalogue" class="hover:bg-brand-700 px-3 py-1 rounded">
@@ -117,7 +217,7 @@
             <a href="#about" class="hover:bg-brand-700 px-3 py-1 rounded">
                 Qui sommes‑nous ?
             </a>
-            <a href="#pricing" class="hover:bg-brand-700 px-3 py-1 rounded">
+            <a href="/catalogue" class="hover:bg-brand-700 px-3 py-1 rounded">
                 Liste de prix
             </a>
 
@@ -130,7 +230,7 @@
     </nav>
 </header>
 
-<main class="max-w-7xl mx-auto px-4 py-6 min-h-screen">
+<main class="max-w-7xl mx-auto px-4 pt-0 pb-6 min-h-screen">
     @yield('content')
 </main>
 
