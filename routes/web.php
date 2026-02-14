@@ -9,6 +9,10 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -53,4 +57,16 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 
     // Détail d'une commande
     Route::get('/commandes/{order}', [OrderController::class, 'show'])->name('orders.show');
+
+    Route::middleware(['auth', 'admin'])
+    ->prefix('admin')
+    ->as('admin.')
+    ->group(function () {
+        Route::get('/', fn () => redirect()->route('admin.products.index'))->name('dashboard');
+
+        Route::resource('products', AdminProductController::class)->except(['show']);
+        Route::resource('categories', AdminCategoryController::class)->except(['show']);
+        Route::resource('orders', AdminOrderController::class)->only(['index', 'show', 'update']);
+    });
 });
+

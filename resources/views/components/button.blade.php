@@ -16,6 +16,6 @@
     ];
 @endphp
 
-<button {{ $attributes->merge(['class' => $base.' '.$sizes[$size].' '.$variants[$variant]]) }}>
+<button {{ $attributes->merge(['class' => $base.' '.$sizes[$size].' '.$variants[$variant]]) }} type="submit">
     {{ $slot }}
 </button>
