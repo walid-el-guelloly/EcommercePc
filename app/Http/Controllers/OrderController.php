@@ -9,7 +9,7 @@ class OrderController extends Controller
 {
     public function show(Order $order)
     {
-        // Sécurité : un user ne voit que ses propres commandes
+        
         if ($order->user_id !== Auth::id()) {
             abort(403);
         }

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 
 class CheckoutController extends Controller
 {
-    // Afficher la page de checkout (récapitulatif)
+    
     public function show()
 {
     $cart = session()->get('cart', []);
@@ -40,7 +40,7 @@ public function process(Request $request)
             ->withErrors(['checkout' => 'Votre panier est vide.']);
     }
 
-    // Validation des adresses
+    
     $data = $request->validate([
         'shipping_name'          => 'required|string|max:255',
         'shipping_address'       => 'required|string|max:255',
@@ -59,7 +59,7 @@ public function process(Request $request)
         'billing_phone'         => 'nullable|string|max:50',
     ]);
 
-    // Si "même adresse" => on copie les champs
+    
     $billingSame = $request->boolean('billing_same_as_shipping', true);
     if ($billingSame) {
         $data['billing_name']        = $data['shipping_name'];
@@ -102,10 +102,10 @@ public function process(Request $request)
                 ];
             }
 
-            // Créer la commande
+            
             $order = Order::create([
                 'user_id'            => $user->id,
-                'status'             => 'pending', // en attente de paiement/traitement
+                'status'             => 'pending', 
                 'total'              => $total,
                 'shipping_name'      => $data['shipping_name'],
                 'shipping_address'   => $data['shipping_address'],

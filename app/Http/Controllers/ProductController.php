@@ -27,14 +27,14 @@ class ProductController extends Controller
             });
         }
 
-        // Tri
+        
         $sort = $request->input('sort');
         if ($sort === 'price_asc') {
             $query->orderBy('price', 'asc');
         } elseif ($sort === 'price_desc') {
             $query->orderBy('price', 'desc');
         } else {
-            // par défaut : les plus récents
+            
             $query->latest();
         }
 

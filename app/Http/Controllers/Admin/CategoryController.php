@@ -66,7 +66,7 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
-        // Option : empêcher si des produits sont liés
+        
         if ($category->products()->exists()) {
             return back()->with('success', 'Impossible de supprimer : des produits sont liés à cette catégorie.');
         }

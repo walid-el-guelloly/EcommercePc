@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
 {
-    // Formulaire de connexion
+    
     public function create()
     {
         return view('auth.login');
     }
 
-    // Traitement du formulaire de connexion
+    
     public function store(Request $request)
     {
         $credentials = $request->validate([
@@ -35,7 +35,7 @@ class AuthenticatedSessionController extends Controller
         return redirect()->intended(route('home'))->with('success', 'Connexion réussie.');
     }
 
-    // Déconnexion
+    
     public function destroy(Request $request)
     {
         Auth::logout();

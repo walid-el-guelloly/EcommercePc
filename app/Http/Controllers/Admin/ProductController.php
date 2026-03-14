@@ -35,19 +35,19 @@ class ProductController extends Controller
             'price'       => 'required|numeric|min:0',
             'stock'       => 'required|integer|min:0',
             'image_file'  => 'nullable|image|max:2048',
-            'image_path'  => 'nullable|string|max:255', // URL optionnelle
+            'image_path'  => 'nullable|string|max:255', 
         ]);
 
         if (empty($data['slug'])) {
             $data['slug'] = Str::slug($data['name']) . '-' . uniqid();
         }
 
-        // Gestion de l'image
+        
         $imagePath = $data['image_path'] ?? null;
 
         if ($request->hasFile('image_file')) {
             $storedPath = $request->file('image_file')->store('products', 'public');
-            $imagePath = $storedPath; // on stocke le chemin relative (ex: products/xyz.jpg)
+            $imagePath = $storedPath; 
         }
 
         Product::create([
@@ -87,15 +87,15 @@ class ProductController extends Controller
             $data['slug'] = $product->slug ?: Str::slug($data['name']) . '-' . uniqid();
         }
 
-        // On part de l'image actuelle
+        
         $imagePath = $product->image_path;
 
-        // Si une nouvelle URL est fournie (et pas de fichier), on remplace
+        
         if (!empty($data['image_path']) && !$request->hasFile('image_file')) {
             $imagePath = $data['image_path'];
         }
 
-        // Si un fichier est uploadé, il prend le dessus
+        
         if ($request->hasFile('image_file')) {
             $storedPath = $request->file('image_file')->store('products', 'public');
             $imagePath = $storedPath;

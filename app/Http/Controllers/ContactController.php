@@ -24,11 +24,11 @@ class ContactController extends Controller
         'message' => 'required|string|min:10',
     ]);
 
-    // 1) Enregistrement en base
+    
     $contactMessage = ContactMessage::create($data);
 
-    // 2) Envoi de l’email
-    Mail::to('walid8el8guelloly@gmail.com') // remplace par ton vrai email si besoin
+    
+    Mail::to('walid8el8guelloly@gmail.com') 
         ->send(new ContactMessageReceived($contactMessage));
 
     return back()->with('success', 'Merci, votre message a bien été envoyé. Nous vous répondrons rapidement.');
